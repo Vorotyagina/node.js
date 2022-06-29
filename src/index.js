@@ -1,17 +1,18 @@
 const http = require('http');
 const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
+const showUsers = require('./module/users');
 
+
+const users = showUsers();
 const server = http.createServer((request, response) => {
 
   const url = new URL(request.url, 'http://127.0.0.1'); 
-  const users = fs.readFileSync("./src/data/users.json")
+  // const users = fs.readFileSync("./src/data/users.json")
 
   let name = url.searchParams.get("name");
   let usersreq = url.searchParams.get("users");
   
-  console.log(url);
-  console.log(url.searchParams);
     if (usersreq === '') {
       response.statusCode = 200;
       response.statusMessage = 'OK';
